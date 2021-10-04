@@ -1,1 +1,10 @@
-<p>commentaire works!</p>
+<div class="d-flex flex-column content">
+    <ng-template [ngIf]="commentaires">
+        <div *ngFor="let commentaire of commentaires" class="item-commentaire">
+            <div class="author">
+                Autheur: {{commentaire.name}} | {{commentaire.email}}
+            </div>
+            {{commentaire.body}}
+        </div>
+    </ng-template>
+</div>

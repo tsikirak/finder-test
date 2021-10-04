@@ -1,29 +1,48 @@
 <div class="container-fluid">
     <div class="d-flex flex-row-reverse bd-highlight menu">
-        <div *ngIf="user.userName.length > 0; else login" class="userName">{{user.userName}}</div>
+        <div *ngIf="isConnected; else login" class="userName">{{user.userName}}</div>
         <ng-template #login>
             <div>
                 <a [routerLink]="['/login']" routerLinkActive="router-link-active">login</a>
             </div>
         </ng-template>
     </div>
-    <div class="d-flex flex-row align-items-center height-100-vh justify-content-center">
-        <ngb-carousel *ngIf="images && images.length > 2">
-            <ng-template ngFor let-image [ngForOf]="images">
-                <ng-template ngbSlide>
-                    <div class="picsum-img-wrapper">
-                        <img [src]="image.url" [alt]="image.title">
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>{{image.title}}</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </div>
+    <div class="d-flex flex-row align-items-center height-100-vh justify-content-center row">
+        <div class="col-lg-8 justify-content-center d-flex" *ngIf="isConnected ; else template">
+            <ngb-carousel *ngIf="images && images.length > 2" >
+                <ng-template ngFor let-image [ngForOf]="images">
+                    <ng-template ngbSlide>
+                        <div class="picsum-img-wrapper">
+                            <img [src]="image.url" [alt]="image.title">
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>{{image.title}}</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </div>
+                    </ng-template>
+                    
                 </ng-template>
-                
-            </ng-template>
-        </ngb-carousel>
-        <div *ngIf="user.userName.length > 0" class="d-flex flex-row height-100-vh">
-            commentaire
+            </ngb-carousel>
+        </div>
+        <ng-template #template>
+            <ngb-carousel *ngIf="images && images.length > 2" >
+                <ng-template ngFor let-image [ngForOf]="images">
+                    <ng-template ngbSlide>
+                        <div class="picsum-img-wrapper">
+                            <img [src]="image.url" [alt]="image.title">
+                        </div>
+                        <div class="carousel-caption">
+                            <h3>{{image.title}}</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </div>
+                    </ng-template>
+                    
+                </ng-template>
+            </ngb-carousel>
+        </ng-template>
+        
+        <div *ngIf="isConnected" class="d-flex flex-row height-100-vh col-lg-4">
+            <app-commentaire></app-commentaire>
         </div>
     </div>
 </div>
