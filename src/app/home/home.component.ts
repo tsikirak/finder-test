@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../user/model/user';
 import { UserService } from '../user/service/user.service';
 import { ImageService } from './service/image.service';
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   images: any;
   user: User = {userName: ''};
   isConnected: boolean = false;
-  constructor(private imageService: ImageService, private userService: UserService) {
+  constructor(private imageService: ImageService, private userService: UserService, private router: Router) {
     this.images = new Array;
     
   }
@@ -32,6 +33,12 @@ export class HomeComponent implements OnInit {
       this.user = {userName: ''};
     }
     );
+  }
+
+  logout() {
+    this.userService.logout().subscribe(res=> {
+      this.router.navigate(['/login']);
+    })
   }
 
 }

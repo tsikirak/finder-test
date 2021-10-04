@@ -23,4 +23,11 @@ export class UserService {
       
     });
   }
+
+  logout(): Observable<boolean> {
+    return new Observable(observer => {
+      localStorage.clear();
+      observer.next(true);
+    });
+  }
 }

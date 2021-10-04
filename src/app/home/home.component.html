@@ -1,6 +1,9 @@
 <div class="container-fluid">
     <div class="d-flex flex-row-reverse bd-highlight menu">
-        <div *ngIf="isConnected; else login" class="userName">{{user.userName}}</div>
+        <div *ngIf="isConnected; else login" class="userName">
+            {{user.userName}}
+            <span (click)="logout()" class="logout">(sign-out)</span>
+        </div>
         <ng-template #login>
             <div>
                 <a [routerLink]="['/login']" routerLinkActive="router-link-active">login</a>
