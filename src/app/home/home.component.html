@@ -1,10 +1,13 @@
 <div class="container-fluid">
     <div class="d-flex flex-row-reverse bd-highlight menu">
-        <div>
-            <a [routerLink]="['/login']" routerLinkActive="router-link-active">login</a>
-        </div>
+        <div *ngIf="user.userName.length > 0; else login" class="userName">{{user.userName}}</div>
+        <ng-template #login>
+            <div>
+                <a [routerLink]="['/login']" routerLinkActive="router-link-active">login</a>
+            </div>
+        </ng-template>
     </div>
-    <div class="d-flex flex-row justify-content-center">
+    <div class="d-flex flex-row align-items-center height-100-vh justify-content-center">
         <ngb-carousel *ngIf="images && images.length > 2">
             <ng-template ngFor let-image [ngForOf]="images">
                 <ng-template ngbSlide>
@@ -19,5 +22,8 @@
                 
             </ng-template>
         </ngb-carousel>
+        <div *ngIf="user.userName.length > 0" class="d-flex flex-row height-100-vh">
+            commentaire
+        </div>
     </div>
 </div>

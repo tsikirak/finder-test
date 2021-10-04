@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../user/model/user';
+import { UserService } from '../user/service/user.service';
 import { ImageService } from './service/image.service';
 
 @Component({
@@ -8,7 +10,9 @@ import { ImageService } from './service/image.service';
 })
 export class HomeComponent implements OnInit {
   images: any;
-  constructor(private imageService: ImageService) {
+  user: User = {userName: ''};
+  isConnected: boolean = false;
+  constructor(private imageService: ImageService, private userService: UserService) {
     this.images = new Array;
     
   }
@@ -17,9 +21,17 @@ export class HomeComponent implements OnInit {
     [10,20,30].map((n: number) => {
       this.imageService.getImage(n).subscribe(res=> {
         this.images.push(res);
-        console.log(this.images);
       });
     });
+    this.userService.getUser().subscribe((res: User) => {
+      this.user = res;
+      this.isConnected = true;
+      
+    }, error => {
+      this.isConnected = false;
+      this.user = {userName: ''};
+    }
+    );
   }
 
 }
