@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from './service/image.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  images: any;
+  constructor(private imageService: ImageService) {
+    this.images = new Array;
+    
+  }
 
   ngOnInit(): void {
+    [10,20,30].map((n: number) => {
+      this.imageService.getImage(n).subscribe(res=> {
+        this.images.push(res);
+        console.log(this.images);
+      });
+    });
   }
 
 }

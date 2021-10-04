@@ -1,0 +1,13 @@
+@import '../../assets/scss/variable';
+.menu {
+    background-color: $bg-blue;
+    color: $text-bg-blue;
+    padding: 20px;
+    a, a:hover, a:visited{
+        color: $text-bg-blue;
+        text-decoration: none;
+        text-transform: capitalize;
+        font-size: 1rem;
+        float: right;
+    }
+}
